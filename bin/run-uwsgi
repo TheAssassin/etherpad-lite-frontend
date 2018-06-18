@@ -1,0 +1,6 @@
+#! /bin/bash
+
+cd lib/frontend
+
+cpucount=$(expr 1 + $(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1))
+exec uwsgi --master --processes=$cpucount --http-socket 127.0.0.1:18001 --module wsgi --callable app

@@ -1,0 +1,30 @@
+#! /bin/bash
+
+cd $EPF_ROOT
+
+counter=1
+until pg_isready -h "$POSTGRES_HOST" > /dev/null; do
+    echo "waiting for postgres server to accept connections ($counter)..."
+    sleep 1
+    counter=$[counter + 1]
+done
+
+export PGPASSWORD="$POSTGRES_PASSWORD"
+createdb -h "$POSTGRES_HOST" -U "$POSTGRES_USER" eplitefrontend || true
+createdb -h "$POSTGRES_HOST" -U "$POSTGRES_USER" etherpad-lite || true
+unset PGPASSWORD
+
+sed -i "s/PGUSERNAME/$POSTGRES_USER/g" lib/etherpad-lite/settings.json
+sed -i "s/PGPASSWORD/$POSTGRES_PASSWORD/g" lib/etherpad-lite/settings.json
+sed -i "s/PGHOST/$POSTGRES_HOST/g" lib/etherpad-lite/settings.json
+
+# make sure there's no trailing \n in the output
+python -c "import os, random, string; open(os.path.join(os.environ['EPF_ROOT'], 'lib/etherpad-lite/APIKEY.txt'), 'w').write(''.join(random.choice(string.letters+string.digits) for i in range(50)))"
+
+chown -R eplitefrontend.eplitefrontend .
+
+pushd lib/frontend >/dev/null
+sudo -EHu eplitefrontend python2.7 manage.py db upgrade
+popd >/dev/null
+
+exec sudo -EHu eplitefrontend bin/run-supervisord

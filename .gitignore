@@ -1,0 +1,17 @@
+.cache
+.coverage
+.project
+.pydevproject
+.idea/
+
+*.pyc
+*.pyo
+
+__pycache__/
+.tox/
+
+*.db
+*.sqlite*
+
+docker-compose.yml
+docker-data/

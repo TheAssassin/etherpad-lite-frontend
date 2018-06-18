@@ -1,0 +1,52 @@
+{
+  "title": "Etherpad Lite",
+
+  "favicon": "favicon.ico",
+
+  "ip": "127.0.0.1",
+  "port" : 18002,
+
+   "dbType" : "postgres",
+   "dbSettings" : {
+                    "user"    : "PGUSERNAME",
+                    "host"    : "PGHOST",
+                    "password": "PGPASSWORD",
+                    "database": "etherpad-lite"
+                  },
+
+  "defaultPadText" : "Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at http:\/\/etherpad.org\n",
+
+  "padOptions": {
+    "noColors": false,
+    "showControls": true,
+    "showChat": true,
+    "showLineNumbers": true,
+    "useMonospaceFont": false,
+    "userName": true,
+    "userColor": true,
+    "rtl": false,
+    "alwaysShowChat": true,
+    "chatAndUsers": true,
+    "lang": "en-gb"
+  },
+
+  "suppressErrorsInPadText" : false,
+  "requireSession" : false,
+  "editOnly" : true,
+  "sessionNoPassword" : false,
+  "minify" : true,
+  "maxAge" : 21600,
+  "abiword" : "/usr/bin/abiword",
+  "allowUnknownFileEnds" : true,
+  "requireAuthentication" : false,
+  "requireAuthorization" : false,
+  "trustProxy" : true,
+  "disableIPlogging" : true,
+  "socketTransportProtocols" : ["xhr-polling", "jsonp-polling", "htmlfile"],"loadTest": false,
+  "loglevel": "INFO",
+  "logconfig" :
+    { "appenders": [
+        { "type": "console" }
+      ]
+    }
+}

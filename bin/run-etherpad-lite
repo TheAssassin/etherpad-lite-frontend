@@ -1,0 +1,48 @@
+#! /bin/bash
+
+###################################################################
+# This script takes care of setting up and running etherpad lite. #
+###################################################################
+
+dependency_is_installed() {
+    npm list | grep -q $1
+}
+
+install_dependencies_if_necessary() {
+    if [ ! -d node_modules ]; then
+        bin/installDeps.sh
+    fi
+    install_db_driver_if_necessary
+}
+
+install_db_driver_if_necessary() {
+    db_type=$(grep '"dbType"' settings.json | head -n1 |  sed 's/"//g' | sed 's/,//g' | awk '{ print $3 }')
+
+    dependency_is_installed $db_type || (
+        case "$db_type" in
+            "sqlite")
+                dependency_is_installed sqlite3 && return 0
+                echo "Installing SQLite3 driver for Node.js..."
+                npm install sqlite3
+                ;;
+            "mysql")
+                dependency_is_installed mysql && return 0
+                echo "Installing MySQL driver for Node.js..."
+                npm install mysql
+                ;;
+            "postgres")
+                dependency_is_installed postgresql && return 0
+                echo "Installing PostgreSQL driver for Node.js..."
+                npm install postgresql
+                ;;
+            *)
+                echo "error: type $db_type not supported!"
+                exit 1
+                ;;
+        esac
+    )
+}
+
+cd lib/etherpad-lite
+install_dependencies_if_necessary
+exec node node_modules/ep_etherpad-lite/node/server.js

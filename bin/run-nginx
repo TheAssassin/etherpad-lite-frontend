@@ -1,0 +1,16 @@
+#! /bin/bash
+
+NGINX_DIR=lib/nginx
+NGINX_BIN=$NGINX_DIR/objs/nginx
+
+cpucount=$(expr 1 + $(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1))
+
+if [ ! -f $NGINX_BIN ]; then
+    echo "Compiling nginx..."
+    pushd $NGINX_DIR
+    ./configure --prefix="$(readlink -f $PWD/../..)"
+    make -j$cpucount
+    popd
+fi
+
+exec $NGINX_BIN -c $(readlink -f conf/nginx/nginx.conf) $*

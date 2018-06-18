@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}502: Bad Gateway{% endblock title %}
+
+{% block content %}
+<h1>502: Bad Gateway</h1>
+
+<p>
+    A connection to the backend etherpad lite server could not be established.
+</p>
+<p>
+    <strong>This is normal if you just started up the etherpad lite server</strong>
+    as it needs a few seconds until it accepts connections.
+</p>
+{% endblock content %}

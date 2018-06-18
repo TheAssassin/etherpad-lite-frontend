@@ -1,0 +1,4 @@
+#! /bin/bash
+
+[ -d var/ ] && mkdir -p var/log/ var/run/
+exec supervisord --nodaemon --configuration conf/supervisord.conf

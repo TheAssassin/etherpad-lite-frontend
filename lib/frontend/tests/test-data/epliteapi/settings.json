@@ -1,0 +1,68 @@
+{
+  "title": "Etherpad Testing",
+
+  "favicon": "favicon.ico",
+
+  "ip": "0.0.0.0",
+  "port": 9001,
+
+  "dbType": "dirty",
+  "dbSettings": { "filename" : "var/dirty.db" },
+
+  "defaultPadText": "Welcome to Etherpad!",
+
+  "padOptions": {
+    "noColors": false,
+    "showControls": true,
+    "showChat": true,
+    "showLineNumbers": true,
+    "useMonospaceFont": false,
+    "userName": false,
+    "userColor": false,
+    "rtl": false,
+    "alwaysShowChat": false,
+    "chatAndUsers": false,
+    "lang": "en-gb"
+  },
+
+  "suppressErrorsInPadText" : false,
+  "requireSession" : false,
+  "editOnly" : false,
+
+  "sessionNoPassword" : false,
+
+  "minify" : true,
+
+  "maxAge" : 21600, // 60 * 60 * 6 = 6 hours
+
+  "abiword" : "/usr/bin/abiword",
+
+  "allowUnknownFileEnds" : true,
+
+  "requireAuthentication" : false,
+
+  "requireAuthorization" : false,
+
+  "trustProxy" : false,
+
+  "disableIPlogging" : false,  
+
+  "users": {
+    "admin": {
+      "password": "changeme1",
+      "is_admin": true
+    },
+    "user": {
+      "password": "changeme1",
+      "is_admin": false
+    }
+  }, 
+
+  "socketTransportProtocols" : ["xhr-polling", "jsonp-polling", "htmlfile"],
+
+  "loadTest": false,
+
+  "loglevel": "INFO",
+
+  "logconfig": { "appenders": [ { "type": "console" } ] }
+}

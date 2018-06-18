@@ -1,0 +1,3 @@
+#! /bin/bash
+
+exec supervisorctl -c conf/supervisord.conf $*

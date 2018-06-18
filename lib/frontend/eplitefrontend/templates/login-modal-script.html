@@ -1,0 +1,17 @@
+{% if not current_user.is_authenticated() %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#login-modal").modal({
+            show: false
+        });
+        $("#login-modal-button").click(function() {
+            $("#login-modal").modal("show").on("shown.bs.modal", function() {
+                $("#login-modal input[name='username']").focus();
+            });
+        });
+        $("#login-button").click(function() {
+            $("#login-submit").trigger("click");
+        });
+    });
+</script>
+{% endif %}

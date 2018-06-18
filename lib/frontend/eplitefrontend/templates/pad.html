@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Pad: {{ pad_name }}{% endblock title %}
+
+{% block content %}
+<style type="text/css">
+    .epframe {
+        width: 100%;
+        height: calc(100vh - 160px);
+        border: 1px solid black;
+    }
+</style>
+
+<h2>
+    <a href="{{ url_for('index') }}">&laquo;</a>
+    Pad: {{ pad_name }}
+    <span class="pull-right">
+        <a href="{{ url_for('view_pad_fullscreen', pad_name=pad_name) }}" title="fullscreen">
+            <i class="fa fa-expand"></i>
+        </a>
+    </span>
+</h2>
+<iframe src="{{ pad_url.decode("utf-8") }}" class="epframe"></iframe>
+
+{% include "login-modal.html" %}
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+{% include "login-modal-script.html" %}
+{% endblock scripts %}

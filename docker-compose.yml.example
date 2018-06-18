@@ -1,0 +1,29 @@
+version: "2"
+
+services:
+  postgres:
+    restart: unless-stopped
+    image: postgres:9.3
+    volumes:
+      - "./docker-data/postgres:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "changemeimmediately"
+
+  epf:
+    restart: unless-stopped
+    build: .
+    volumes:
+      - "./docker-data/epf/var:/srv/eplitefrontend/var"
+    links:
+      - "postgres:postgres"
+    ports:
+      - "127.0.0.1:18000:18000"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "changemeimmediately"
+      POSTGRES_HOST: "postgres"
+      LDAP_HOST: "ldap://172.17.0.1:389"
+      SECRET_KEY: "changemetoo"
+      AUTHORIZED_USERS: "test"
+      ADMINS: "test"

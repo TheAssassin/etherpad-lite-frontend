@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}404: Not Found{% endblock title %}
+
+{% block content %}
+<h2>
+    404: Not Found
+</h2>
+
+<p>
+    Pad not found: {{ pad_name }}
+</p>
+<p>
+    <a href="{{ url_for('index') }}">
+        &laquo; Back to pad list
+    </a>
+</p>
+
+{% include "login-modal.html" %}
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+{% include "login-modal-script.html" %}
+{% endblock scripts %}
+

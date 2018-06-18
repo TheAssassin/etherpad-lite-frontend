@@ -1,0 +1,6 @@
+[submodule "lib/etherpad-lite"]
+	path = lib/etherpad-lite
+	url = https://github.com/ether/etherpad-lite.git
+[submodule "lib/nginx"]
+	path = lib/nginx
+	url = https://github.com/nginx/nginx.git
